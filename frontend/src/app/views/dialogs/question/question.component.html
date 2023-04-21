@@ -1,0 +1,20 @@
+<div mat-dialog-title>
+  {{ data.question }}
+</div>
+<div mat-dialog-content>
+  <mat-selection-list #answers [multiple]="false">
+    <mat-list-option *ngFor="let answer of data.answers" [value]="answer">
+      {{ answer }}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="null">Cancel</button>
+  <button
+    mat-button
+    [disabled]="!answers.selectedOptions.hasValue()"
+    [mat-dialog-close]="answers?.selectedOptions?.selected?.[0]?.value || null"
+  >
+    Pick
+  </button>
+</div>

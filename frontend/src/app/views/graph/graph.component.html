@@ -1,0 +1,35 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" [opened]="true">
+    <nav>
+      <button
+        mat-raised-button
+        [disabled]="!(parentTopic$ | async)"
+        (click)="pick('back')"
+      >
+        {{ "<--" }}
+        {{
+          (parentTopic$ | async)?.title ? (parentTopic$ | async)?.title : "Back"
+        }}
+      </button>
+
+      <mat-list role="list">
+        <mat-list-item
+          role="listitem"
+          *ngFor="let children of childrens$ | async"
+        >
+          <button
+            mat-button
+            (click)="pick(children.title || '')"
+            [disabled]="!children.questionsCount"
+          >
+            {{ children.title }} {{ children.questionsCount }}
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </nav>
+  </mat-drawer>
+  <mat-drawer-content class="content">
+    <h2>{{ (pickedTopic$ | async)?.title }} {{ totalQuestions$ | async }}</h2>
+    <button mat-raised-button (click)="passTest()">Pass test</button>
+  </mat-drawer-content>
+</mat-drawer-container>
