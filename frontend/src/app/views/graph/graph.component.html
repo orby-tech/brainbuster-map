@@ -2,14 +2,12 @@
   <mat-drawer mode="side" [opened]="true">
     <nav>
       <button
-        mat-raised-button
-        [disabled]="!(parentTopic$ | async)"
-        (click)="pick('back')"
+        mat-button
+        *ngFor="let parentTopic of parentTopics$ | async"
+        (click)="pick(parentTopic.title)"
       >
         {{ "<--" }}
-        {{
-          (parentTopic$ | async)?.title ? (parentTopic$ | async)?.title : "Back"
-        }}
+        {{ parentTopic?.title ? parentTopic?.title : "Back" }}
       </button>
 
       <mat-list role="list">
@@ -30,6 +28,11 @@
   </mat-drawer>
   <mat-drawer-content class="content">
     <h2>{{ (pickedTopic$ | async)?.title }} {{ totalQuestions$ | async }}</h2>
+    <app-graph-svg
+      [pickedTopic]="pickedTopic$ | async"
+      [parentTopics]="parentTopics$ | async"
+      [childrenTopics]="childrenTopics$ | async"
+    ></app-graph-svg>
     <button mat-raised-button (click)="passTest()">Pass test</button>
   </mat-drawer-content>
 </mat-drawer-container>

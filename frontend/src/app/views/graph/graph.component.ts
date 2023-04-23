@@ -31,12 +31,18 @@ export class GraphComponent {
   topics$ = this.graphService.topics$;
 
   pickedTopic$ = new BehaviorSubject<Topic | null>(null);
-  parentTopic$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
+  parentTopics$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
     map(([topics, pickedTopic]) => {
-      return topics.find((t) => {
+      return topics.filter((t) => {
         return !!t.children.find((c) => c === pickedTopic?.title);
       });
     })
+  );
+
+  childrenTopics$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
+    map(([topics, pickedTopic]) =>
+      pickedTopic?.children.map((c) => topics.find((t) => t.title === c)).filter(x=> x) as Topic[]
+    )
   );
 
   childrens$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
@@ -108,9 +114,7 @@ export class GraphComponent {
       return;
     }
     if (title === 'back') {
-      this.parentTopic$.pipe(first()).subscribe((t) => {
-        this.pickedTopic$.next(t || null);
-      });
+     
     } else {
       this.topics$.pipe(first()).subscribe((topics) => {
         this.pickedTopic$.next(topics.find((t) => t.title === title) || null);
