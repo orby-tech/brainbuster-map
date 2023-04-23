@@ -10,6 +10,9 @@ const getQuestionsFromGraph = (graph: TopicGraphItem): QuestionItem[] => {
 };
 
 const getAllTopics = (graph: TopicGraphItem): Topic[] => {
+  if (!graph.questions.length) {
+    console.warn(`${graph.title} : no questions`)
+  }
   return [
     {
       title: graph.title,

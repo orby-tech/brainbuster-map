@@ -108,7 +108,78 @@ export const CrossBrowserCompatibilityTopic = {
     {
       title: "Browser differences and compatibility issues",
       children: [],
-      questions: [],
+      questions: [
+        {
+          question: "What is meant by browser compatibility?",
+          answers: [
+            "Ensuring that a website functions properly across different web browsers",
+            "Ensuring that a website looks identical across different web browsers",
+            "Limiting a website's functionality to a single web browser",
+            "Limiting a website's accessibility to certain users",
+          ],
+          right_answer:
+            "Ensuring that a website functions properly across different web browsers",
+          recommendations: [
+            "Test your website on different browsers to ensure compatibility",
+          ],
+        },
+        {
+          question: "What is a common cause of browser compatibility issues?",
+          answers: [
+            "Differences in how web browsers interpret HTML, CSS, and JavaScript",
+            "Lack of website security measures",
+            "Inconsistent internet speeds",
+            "Outdated web browsers",
+          ],
+          right_answer:
+            "Differences in how web browsers interpret HTML, CSS, and JavaScript",
+          recommendations: [
+            "Use web standards and best practices to reduce compatibility issues",
+          ],
+        },
+        {
+          question:
+            "What is the best approach to addressing browser compatibility issues?",
+          answers: [
+            "Develop and test websites with a focus on web standards and best practices",
+            "Limit website functionality to the most popular web browsers",
+            "Ignore browser compatibility issues and focus on aesthetics",
+            "Use browser-specific features and properties",
+          ],
+          right_answer:
+            "Develop and test websites with a focus on web standards and best practices",
+          recommendations: [
+            "Use tools and resources to identify and resolve compatibility issues",
+          ],
+        },
+        {
+          question:
+            "What is the term used to describe when a website looks different in different web browsers?",
+          answers: [
+            "Browser inconsistency",
+            "Cross-browser compatibility",
+            "Aesthetics variance",
+            "Browser discrepancy",
+          ],
+          right_answer: "Browser inconsistency",
+          recommendations: [
+            "Use CSS resets and frameworks to standardize website appearance across different browsers",
+          ],
+        },
+        {
+          question: "What can be used to ensure browser compatibility?",
+          answers: [
+            "Web standards, best practices, and testing",
+            "Proprietary browser-specific features",
+            "Plugins and extensions",
+            "Outdated web development techniques",
+          ],
+          right_answer: "Web standards, best practices, and testing",
+          recommendations: [
+            "Regularly check for updates and changes to web standards to stay up-to-date",
+          ],
+        },
+      ],
     },
     {
       title: "Polyfills and fallbacks",
@@ -145,7 +216,75 @@ export const WebPerformanceOptimizationTopic = {
     {
       title: "Page speed and loading times",
       children: [],
-      questions: [],
+      questions: [
+        {
+          question: "Why is page speed important?",
+          answers: [
+            "It affects user experience and engagement",
+            "It affects website security",
+            "It affects website aesthetics",
+            "It affects website functionality",
+          ],
+          right_answer: "It affects user experience and engagement",
+          recommendations: [
+            "Optimize images and use a content delivery network (CDN) to improve page speed",
+          ],
+        },
+        {
+          question: "What is the recommended page load time?",
+          answers: [
+            "Under 2 seconds",
+            "Under 5 seconds",
+            "Under 10 seconds",
+            "Under 15 seconds",
+          ],
+          right_answer: "Under 2 seconds",
+          recommendations: [
+            "Minimize HTTP requests and use browser caching to reduce page load time",
+          ],
+        },
+        {
+          question:
+            "What is the impact of slow page speed on website conversion rate?",
+          answers: [
+            "It decreases website conversion rate",
+            "It increases website conversion rate",
+            "It has no impact on website conversion rate",
+            "It decreases website traffic",
+          ],
+          right_answer: "It decreases website conversion rate",
+          recommendations: [
+            "Regularly monitor website performance and optimize website elements to improve page speed",
+          ],
+        },
+        {
+          question: "What is the recommended size for website images?",
+          answers: [
+            "Less than 100KB",
+            "Less than 500KB",
+            "Less than 1MB",
+            "Less than 5MB",
+          ],
+          right_answer: "Less than 100KB",
+          recommendations: [
+            "Use compression techniques and optimize images for the web to reduce image size",
+          ],
+        },
+        {
+          question:
+            "What is the recommended number of fonts to use on a website?",
+          answers: [
+            "Less than 3",
+            "Less than 5",
+            "Less than 10",
+            "There is no limit",
+          ],
+          right_answer: "Less than 3",
+          recommendations: [
+            "Use system fonts and web-safe fonts to reduce the number of HTTP requests and improve page speed",
+          ],
+        },
+      ],
     },
     {
       title: "Caching and browser storage",
@@ -182,7 +321,77 @@ export const WebSecurityTopic = {
     {
       title: "SSL/TLS and HTTPS",
       children: [],
-      questions: [],
+      questions: [
+        {
+          question: "What is SSL/TLS?",
+          answers: [
+            "A protocol that ensures secure communication between servers and clients",
+            "A protocol that ensures fast website loading",
+            "A protocol that ensures website accessibility",
+            "A protocol that ensures website aesthetics",
+          ],
+          right_answer:
+            "A protocol that ensures secure communication between servers and clients",
+          recommendations: [
+            "Always use HTTPS instead of HTTP for improved security",
+          ],
+        },
+        {
+          question: "What is HTTPS?",
+          answers: [
+            "A secure version of HTTP",
+            "A new web programming language",
+            "A type of web hosting",
+            "An email protocol",
+          ],
+          right_answer: "A secure version of HTTP",
+          recommendations: [
+            "Install and use SSL/TLS certificates on your website to enable HTTPS",
+          ],
+        },
+        {
+          question: "What is an SSL/TLS certificate?",
+          answers: [
+            "A digital certificate that authenticates the identity of a website and enables secure communication",
+            "A file that contains website images and videos",
+            "A tool for website development",
+            "A type of website hosting",
+          ],
+          right_answer:
+            "A digital certificate that authenticates the identity of a website and enables secure communication",
+          recommendations: [
+            "Regularly update SSL/TLS certificates and use strong encryption to enhance website security",
+          ],
+        },
+        {
+          question: "What is mixed content?",
+          answers: [
+            "A security vulnerability that occurs when a website serves both HTTP and HTTPS content",
+            "A website design principle",
+            "A type of website content",
+            "A programming language",
+          ],
+          right_answer:
+            "A security vulnerability that occurs when a website serves both HTTP and HTTPS content",
+          recommendations: [
+            "Avoid serving mixed content on your website to prevent security vulnerabilities",
+          ],
+        },
+        {
+          question: "What is HSTS?",
+          answers: [
+            "A security policy that enforces the use of HTTPS on a website",
+            "A programming language",
+            "A type of web hosting",
+            "A website design principle",
+          ],
+          right_answer:
+            "A security policy that enforces the use of HTTPS on a website",
+          recommendations: [
+            "Implement HSTS on your website to improve security and prevent SSL/TLS stripping attacks",
+          ],
+        },
+      ],
     },
     {
       title: "Cross-site scripting (XSS) and injection attacks",
@@ -247,7 +456,77 @@ export const UXTopic = {
       questions: [],
     },
   ],
-  questions: [],
+  questions: [
+    {
+      question: "What does UX stand for?",
+      answers: [
+        "User Experience",
+        "User Expressions",
+        "User Exclusions",
+        "User Expectations",
+      ],
+      right_answer: "User Experience",
+      recommendations: [
+        "Always keep the user in mind when designing digital products and services",
+      ],
+    },
+    {
+      question: "What is a user persona?",
+      answers: [
+        "A fictional representation of a user group with shared characteristics and goals",
+        "A type of website layout",
+        "A website design principle",
+        "A website hosting service",
+      ],
+      right_answer:
+        "A fictional representation of a user group with shared characteristics and goals",
+      recommendations: [
+        "Create user personas to better understand and design for your target audience",
+      ],
+    },
+    {
+      question: "What is usability testing?",
+      answers: [
+        "A method of testing how easy and efficient a digital product or service is to use",
+        "A method of testing website speed",
+        "A method of testing website security",
+        "A method of testing website aesthetics",
+      ],
+      right_answer:
+        "A method of testing how easy and efficient a digital product or service is to use",
+      recommendations: [
+        "Conduct usability testing regularly to identify and address usability issues in your digital products and services",
+      ],
+    },
+    {
+      question: "What is a wireframe?",
+      answers: [
+        "A basic visual guide that represents the layout and structure of a digital product or service",
+        "A type of website content",
+        "A website design principle",
+        "A website hosting service",
+      ],
+      right_answer:
+        "A basic visual guide that represents the layout and structure of a digital product or service",
+      recommendations: [
+        "Create wireframes to plan and visualize the structure and content of your digital products and services",
+      ],
+    },
+    {
+      question: "What is the difference between UI and UX?",
+      answers: [
+        "UI focuses on the visual and interactive design of digital products and services, while UX focuses on the overall user experience",
+        "UI focuses on website speed, while UX focuses on website security",
+        "UI focuses on website aesthetics, while UX focuses on website accessibility",
+        "UI focuses on website content, while UX focuses on website structure",
+      ],
+      right_answer:
+        "UI focuses on the visual and interactive design of digital products and services, while UX focuses on the overall user experience",
+      recommendations: [
+        "Always consider both UI and UX when designing digital products and services for optimal user experience",
+      ],
+    },
+  ],
 };
 
 export const SinglePageApplications = {
@@ -256,7 +535,77 @@ export const SinglePageApplications = {
     {
       title: "JavaScript frameworks and libraries (e.g. React, Angular, Vue)",
       children: [],
-      questions: [],
+      questions: [
+        {
+          question: "What does UX stand for?",
+          answers: [
+            "User Experience",
+            "User Expressions",
+            "User Exclusions",
+            "User Expectations",
+          ],
+          right_answer: "User Experience",
+          recommendations: [
+            "Always keep the user in mind when designing digital products and services",
+          ],
+        },
+        {
+          question: "What is a user persona?",
+          answers: [
+            "A fictional representation of a user group with shared characteristics and goals",
+            "A type of website layout",
+            "A website design principle",
+            "A website hosting service",
+          ],
+          right_answer:
+            "A fictional representation of a user group with shared characteristics and goals",
+          recommendations: [
+            "Create user personas to better understand and design for your target audience",
+          ],
+        },
+        {
+          question: "What is usability testing?",
+          answers: [
+            "A method of testing how easy and efficient a digital product or service is to use",
+            "A method of testing website speed",
+            "A method of testing website security",
+            "A method of testing website aesthetics",
+          ],
+          right_answer:
+            "A method of testing how easy and efficient a digital product or service is to use",
+          recommendations: [
+            "Conduct usability testing regularly to identify and address usability issues in your digital products and services",
+          ],
+        },
+        {
+          question: "What is a wireframe?",
+          answers: [
+            "A basic visual guide that represents the layout and structure of a digital product or service",
+            "A type of website content",
+            "A website design principle",
+            "A website hosting service",
+          ],
+          right_answer:
+            "A basic visual guide that represents the layout and structure of a digital product or service",
+          recommendations: [
+            "Create wireframes to plan and visualize the structure and content of your digital products and services",
+          ],
+        },
+        {
+          question: "What is the difference between UI and UX?",
+          answers: [
+            "UI focuses on the visual and interactive design of digital products and services, while UX focuses on the overall user experience",
+            "UI focuses on website speed, while UX focuses on website security",
+            "UI focuses on website aesthetics, while UX focuses on website accessibility",
+            "UI focuses on website content, while UX focuses on website structure",
+          ],
+          right_answer:
+            "UI focuses on the visual and interactive design of digital products and services, while UX focuses on the overall user experience",
+          recommendations: [
+            "Always consider both UI and UX when designing digital products and services for optimal user experience",
+          ],
+        },
+      ],
     },
     {
       title: "Routing and state management",
@@ -293,7 +642,78 @@ export const ProgressiveWebAppstopic = {
     {
       title: "Service workers and offline support",
       children: [],
-      questions: [],
+      questions: [
+        {
+          question: "What are service workers?",
+          answers: [
+            "JavaScript files that run in the background of web pages to provide additional functionality",
+            "A type of web browser",
+            "A programming language",
+            "A web development tool",
+          ],
+          right_answer:
+            "JavaScript files that run in the background of web pages to provide additional functionality",
+          recommendations: [
+            "Consider using service workers to improve website performance and offline support",
+          ],
+        },
+        {
+          question: "What is offline support?",
+          answers: [
+            "The ability of a website to function without an internet connection",
+            "The ability of a website to prevent malicious attacks",
+            "The ability of a website to load faster",
+            "The ability of a website to support multiple languages",
+          ],
+          right_answer:
+            "The ability of a website to function without an internet connection",
+          recommendations: [
+            "Provide offline support to improve user experience and accessibility, especially in areas with poor internet connectivity",
+          ],
+        },
+        {
+          question: "What is a cache?",
+          answers: [
+            "A temporary storage location for web content",
+            "A type of JavaScript function",
+            "A type of web server",
+            "A type of web page layout",
+          ],
+          right_answer: "A temporary storage location for web content",
+          recommendations: [
+            "Use caching to speed up website loading times and reduce server load",
+          ],
+        },
+        {
+          question: "What is the purpose of the Cache API?",
+          answers: [
+            "To give developers control over the caching of web content",
+            "To block access to certain websites",
+            "To speed up web browsing",
+            "To provide website security",
+          ],
+          right_answer:
+            "To give developers control over the caching of web content",
+          recommendations: [
+            "Use the Cache API to control caching behavior and improve website performance",
+          ],
+        },
+        {
+          question:
+            "What is the difference between online and offline events in service workers?",
+          answers: [
+            "Online events are triggered when the device has internet connectivity, while offline events are triggered when the device is offline",
+            "Online events are triggered when the device is offline, while offline events are triggered when the device has internet connectivity",
+            "Online events are triggered by user actions, while offline events are triggered automatically",
+            "There is no difference between online and offline events in service workers",
+          ],
+          right_answer:
+            "Online events are triggered when the device has internet connectivity, while offline events are triggered when the device is offline",
+          recommendations: [
+            "Understand the online and offline events in service workers to build robust offline support for your website",
+          ],
+        },
+      ],
     },
     {
       title: "Web app manifest and installation prompts",
@@ -353,7 +773,78 @@ export const WebComponentsTopic = {
       questions: [],
     },
   ],
-  questions: [],
+  questions: [
+    {
+      question: "What are service workers?",
+      answers: [
+        "JavaScript files that run in the background of web pages to provide additional functionality",
+        "A type of web browser",
+        "A programming language",
+        "A web development tool",
+      ],
+      right_answer:
+        "JavaScript files that run in the background of web pages to provide additional functionality",
+      recommendations: [
+        "Consider using service workers to improve website performance and offline support",
+      ],
+    },
+    {
+      question: "What is offline support?",
+      answers: [
+        "The ability of a website to function without an internet connection",
+        "The ability of a website to prevent malicious attacks",
+        "The ability of a website to load faster",
+        "The ability of a website to support multiple languages",
+      ],
+      right_answer:
+        "The ability of a website to function without an internet connection",
+      recommendations: [
+        "Provide offline support to improve user experience and accessibility, especially in areas with poor internet connectivity",
+      ],
+    },
+    {
+      question: "What is a cache?",
+      answers: [
+        "A temporary storage location for web content",
+        "A type of JavaScript function",
+        "A type of web server",
+        "A type of web page layout",
+      ],
+      right_answer: "A temporary storage location for web content",
+      recommendations: [
+        "Use caching to speed up website loading times and reduce server load",
+      ],
+    },
+    {
+      question: "What is the purpose of the Cache API?",
+      answers: [
+        "To give developers control over the caching of web content",
+        "To block access to certain websites",
+        "To speed up web browsing",
+        "To provide website security",
+      ],
+      right_answer:
+        "To give developers control over the caching of web content",
+      recommendations: [
+        "Use the Cache API to control caching behavior and improve website performance",
+      ],
+    },
+    {
+      question:
+        "What is the difference between online and offline events in service workers?",
+      answers: [
+        "Online events are triggered when the device has internet connectivity, while offline events are triggered when the device is offline",
+        "Online events are triggered when the device is offline, while offline events are triggered when the device has internet connectivity",
+        "Online events are triggered by user actions, while offline events are triggered automatically",
+        "There is no difference between online and offline events in service workers",
+      ],
+      right_answer:
+        "Online events are triggered when the device has internet connectivity, while offline events are triggered when the device is offline",
+      recommendations: [
+        "Understand the online and offline events in service workers to build robust offline support for your website",
+      ],
+    },
+  ],
 };
 
 export const BrowserAPIsTopic = {
@@ -409,6 +900,6 @@ export const FrontendTopic = {
     ProgressiveWebAppstopic,
     WebComponentsTopic,
     BrowserAPIsTopic,
-  ],
+     ],
   questions: [],
 };
