@@ -1,36 +1,39 @@
-<svg width="500px" height="500px">
-    
-  <g *ngFor="let topic of topics$  | async">
+<div id="host">
+  <svg [attr.width]="svgWidth$ | async" height="500px">
+    <g *ngFor="let topic of topics$ | async">
+      <text
+        dominant-baseline="middle"
+        text-anchor="middle"
+        fill="black"
+        style="background-color: #ffffff"
+        [attr.transform]="topic.transform"
+      >
+        <tspan
+          *ngFor="let tspan of topic.title; index as i"
+          [attr.dy]="i === 0 ? '0px' : '10px'"
+          x="0"
+        >
+          {{ tspan }}
+        </tspan>
+      </text>
+      <line
+        [attr.x1]="topic.vector.x1"
+        [attr.y1]="topic.vector.y1"
+        [attr.x2]="topic.vector.x2"
+        [attr.y2]="topic.vector.y2"
+        stroke="black"
+      />
+    </g>
+
     <text
+      *ngIf="pickedTopicPosition$ | async; let pickedTopicPosition"
       dominant-baseline="middle"
       text-anchor="middle"
       fill="black"
-      style="background-color: #ffffff;"
-      [attr.transform]="topic.transform"
+      [attr.x]="pickedTopicPosition.x"
+      [attr.y]="pickedTopicPosition.y"
     >
-      <tspan *ngFor="let tspan of topic.title; index as i" [attr.dy]="i===0 ? '0px': '10px'" x="0">
-        {{ tspan }}
-      </tspan>
+      {{ (pickedTopic$ | async)?.title }}
     </text>
-    <line
-      [attr.x1]="topic.vector.x1"
-      [attr.y1]="topic.vector.y1"
-      [attr.x2]="topic.vector.x2"
-      [attr.y2]="topic.vector.y2"
-      stroke="black"
-    />
-  </g>
-
-
-
-  <text
-    *ngIf="pickedTopicPosition$ | async; let pickedTopicPosition"
-    dominant-baseline="middle"
-    text-anchor="middle"
-    fill="black"
-    [attr.x]="pickedTopicPosition.x"
-    [attr.y]="pickedTopicPosition.y"
-  >
-    {{ (pickedTopic$ | async)?.title }}
-  </text>
-</svg>
+  </svg>
+</div>

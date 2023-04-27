@@ -1,13 +1,18 @@
-import { Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+} from '@angular/core';
 import { Topic } from '@common/graph/types';
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-graph-svg',
   templateUrl: './graph-svg.component.svg',
   styleUrls: ['./graph-svg.component.scss'],
 })
-export class GraphSvgComponent {
+export class GraphSvgComponent implements AfterViewInit {
   @Input() set pickedTopic(pickedTopic: Topic | null) {
     this.pickedTopic$.next(pickedTopic);
   }
@@ -22,6 +27,7 @@ export class GraphSvgComponent {
 
   svgWidth$ = new BehaviorSubject<number>(500);
   svgHeight$ = new BehaviorSubject<number>(500);
+
   pickedTopicPosition$ = combineLatest([this.svgWidth$, this.svgHeight$]).pipe(
     map(([svgWidth, svgHeight]) => {
       return {
@@ -57,10 +63,10 @@ export class GraphSvgComponent {
           x: x,
           y: y,
           vector: {
-            x1: svgWidth / 2 +(x - svgWidth / 2) * 0.1,
-            y1: svgHeight / 2 +(y - svgHeight / 2) * 0.1,
-            x2: svgWidth / 2+ (x - svgWidth / 2) * 0.9,
-            y2: svgHeight/2 + (y - svgHeight / 2) * 0.9,
+            x1: svgWidth / 2 + (x - svgWidth / 2) * 0.1,
+            y1: svgHeight / 2 + (y - svgHeight / 2) * 0.1,
+            x2: svgWidth / 2 + (x - svgWidth / 2) * 0.9,
+            y2: svgHeight / 2 + (y - svgHeight / 2) * 0.9,
           },
         };
       });
@@ -76,7 +82,8 @@ export class GraphSvgComponent {
     map(([childrenTopics, svgWidth, svgHeight, pickedTopicPosition]) => {
       const childrenTopicsTopicsLength = childrenTopics.length;
       return childrenTopics.map((t, i) => {
-        const angel = (Math.PI / childrenTopicsTopicsLength / 2) * (i * 2 + 1) + Math.PI;
+        const angel =
+          (Math.PI / childrenTopicsTopicsLength / 2) * (i * 2 + 1) + Math.PI;
         const rotationAngelNotCleared = (angel / Math.PI) * 360;
         const rotationAngel =
           rotationAngelNotCleared === 180 ? 0 : rotationAngelNotCleared;
@@ -89,15 +96,32 @@ export class GraphSvgComponent {
           x: x,
           y: y,
           vector: {
-            x1: svgWidth / 2 +(x - svgWidth / 2) * 0.1,
-            y1: svgHeight / 2 +(y - svgHeight / 2) * 0.1,
-            x2: svgWidth / 2+ (x - svgWidth / 2) * 0.9,
-            y2: svgHeight/2 + (y - svgHeight / 2) * 0.9,
+            x1: svgWidth / 2 + (x - svgWidth / 2) * 0.1,
+            y1: svgHeight / 2 + (y - svgHeight / 2) * 0.1,
+            x2: svgWidth / 2 + (x - svgWidth / 2) * 0.9,
+            y2: svgHeight / 2 + (y - svgHeight / 2) * 0.9,
           },
         };
       });
     })
   );
 
-  topics$ = combineLatest([this.childrenTopicsToSvg$, this.parantTopicsToSvg$]).pipe(map(x=> x.flat()))
+  topics$ = combineLatest([
+    this.childrenTopicsToSvg$,
+    this.parantTopicsToSvg$,
+  ]).pipe(map((x) => x.flat()));
+
+  constructor(private cd: ChangeDetectorRef) {}
+
+  ngAfterViewInit() {
+    const myEl = document.querySelector('#host');
+    if (!myEl) {
+      return;
+    }
+    const observer = new ResizeObserver((x) => {
+      this.svgWidth$.next(x[0].contentRect.width);
+      this.cd.detectChanges();
+    });
+    observer.observe(myEl);
+  }
 }
