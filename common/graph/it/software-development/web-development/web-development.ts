@@ -1,4 +1,3 @@
-import { QuestionItem, TopicGraphItem } from "./../types";
 import { FrontendTopic, WebSecurityTopic } from "./frontend/frontend";
 import { JavaScriptTopic } from "./frontend/javascript/javascript";
 
