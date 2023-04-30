@@ -18,26 +18,23 @@ export class GraphService {
 
   async load() {
     this.httpClient
-      .get<QuestionItem[]>('http://localhost:2000/api/questions')
+      .get<QuestionItem[]>('/api/questions')
       .subscribe((x) => this.questions$.next(x));
 
     this.httpClient
-      .get<Topic[]>('http://localhost:2000/api/topics')
+      .get<Topic[]>('/api/topics')
       .subscribe((x) => this.topics$.next(x));
   }
 
   getQuestion(title: string): Observable<QuestionItem> {
-    return this.httpClient.post<QuestionItem>(
-      'http://localhost:2000/api/get-question',
-      {
-        title,
-      }
-    );
+    return this.httpClient.post<QuestionItem>('/api/get-question', {
+      title,
+    });
   }
 
   checkAnswer(answer: string, questionTitle: string) {
     return this.httpClient.post<{ recomendations: string } | null>(
-      'http://localhost:2000/api/check-answer',
+      '/api/check-answer',
       {
         answer,
         questionTitle,
@@ -48,7 +45,7 @@ export class GraphService {
 
   getRecomendations(title: string) {
     return this.httpClient.post<QuestionItem['recommendations']>(
-      'http://localhost:2000/api/get-recommendations',
+      '/api/get-recommendations',
       {
         title,
         userId: localStorage.getItem('USER_NAME') || '',
@@ -62,7 +59,7 @@ export class GraphService {
         userName: string;
         score: number;
       }[]
-    >('http://localhost:2000/api/get-top-user-by-topic', {
+    >('/api/get-top-user-by-topic', {
       title,
     });
   }
