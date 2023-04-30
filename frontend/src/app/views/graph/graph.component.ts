@@ -54,7 +54,8 @@ export class GraphComponent {
           topics
         ),
       }))
-    )
+    ),
+    map((c)=> c?.sort((a,b)=> b.questionsCount - a.questionsCount)),
   );
 
   totalQuestions$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
