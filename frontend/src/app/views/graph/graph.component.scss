@@ -10,3 +10,27 @@ nav {
     display: flex;
     flex-direction: column;
 }
+
+mat-drawer-content {
+    display: flex;
+    flex-direction: row;
+
+    main {
+        flex: 2;
+        padding: 20px;
+    }
+
+    .additonal-menu {
+        flex: 1;
+        padding: 20px;
+        
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        mat-card {
+            padding: 20px;
+        }
+    }
+
+}

@@ -26,13 +26,25 @@
       </mat-list>
     </nav>
   </mat-drawer>
-  <mat-drawer-content class="content">
-    <h2>{{ (pickedTopic$ | async)?.title }} {{ totalQuestions$ | async }}</h2>
-    <app-graph-svg
-      [pickedTopic]="pickedTopic$ | async"
-      [parentTopics]="parentTopics$ | async"
-      [childrenTopics]="childrenTopics$ | async"
-    ></app-graph-svg>
-    <button mat-raised-button (click)="passTest()">Pass test</button>
+  <mat-drawer-content>
+    <main class="content">
+      <h2>{{ (pickedTopic$ | async)?.title }} {{ totalQuestions$ | async }}</h2>
+      <app-graph-svg
+        [pickedTopic]="pickedTopic$ | async"
+        [parentTopics]="parentTopics$ | async"
+        [childrenTopics]="childrenTopics$ | async"
+      ></app-graph-svg>
+      <button mat-raised-button (click)="passTest()">Pass test</button>
+    </main>
+    <div class="additonal-menu">
+      <mat-card>
+        <mat-card-title>Top users on topic</mat-card-title>
+        -
+      </mat-card>
+      <mat-card>
+        <mat-card-title>Your recommenadtions in topic</mat-card-title>
+        -
+      </mat-card>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
