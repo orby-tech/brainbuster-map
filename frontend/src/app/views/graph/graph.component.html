@@ -39,12 +39,14 @@
       </button>
     </main>
     <div class="additonal-menu">
+      <h2>Hello, {{ userName }}!</h2>
       <mat-card>
         <mat-card-title>Top users on topic</mat-card-title>
         <mat-card-content>
           <p *ngFor="let r of topUsers$ | async; index as i">
             {{ i + 1 }}) {{ r.userName }} with {{ r.score }} points
           </p>
+          <p *ngIf="!(userOnTop$ | async)">Pass test to be in top!</p>
         </mat-card-content>
       </mat-card>
       <mat-card>

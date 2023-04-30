@@ -28,6 +28,7 @@ interface ExampleFlatNode {
   styleUrls: ['./graph.component.scss'],
 })
 export class GraphComponent {
+  userName = localStorage.getItem('USER_NAME') || '';
   topics$ = this.graphService.topics$;
 
   pickedTopic$ = new BehaviorSubject<Topic | null>(null);
@@ -46,6 +47,10 @@ export class GraphComponent {
       score: number;
     }[]
   >([]);
+
+  userOnTop$ = this.topUsers$.pipe(
+    map((users) => !!users.find((u) => u.userName === this.userName))
+  );
 
   childrenTopics$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
     map(
