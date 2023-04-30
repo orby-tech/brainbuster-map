@@ -40,10 +40,19 @@ export class GraphComponent {
   );
 
   reccomendations$ = new BehaviorSubject<QuestionItem['recommendations']>([]);
+  topUsers$ = new BehaviorSubject<
+    {
+      userName: string;
+      score: number;
+    }[]
+  >([]);
 
   childrenTopics$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
-    map(([topics, pickedTopic]) =>
-      pickedTopic?.children.map((c) => topics.find((t) => t.title === c)).filter(x=> x) as Topic[]
+    map(
+      ([topics, pickedTopic]) =>
+        pickedTopic?.children
+          .map((c) => topics.find((t) => t.title === c))
+          .filter((x) => x) as Topic[]
     )
   );
 
@@ -57,7 +66,7 @@ export class GraphComponent {
         ),
       }))
     ),
-    map((c)=> c?.sort((a,b)=> b.questionsCount - a.questionsCount)),
+    map((c) => c?.sort((a, b) => b.questionsCount - a.questionsCount))
   );
 
   totalQuestions$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
@@ -94,7 +103,11 @@ export class GraphComponent {
       this.graphService
         .getRecomendations(t.title)
         .subscribe((x) => this.reccomendations$.next(x));
-    })
+
+      this.graphService
+        .getTopUserByTopic(t.title)
+        .subscribe((x) => this.topUsers$.next(x));
+    });
   }
 
   private _transformer = (node: FoodNode, level: number) => {
@@ -126,7 +139,6 @@ export class GraphComponent {
       return;
     }
     if (title === 'back') {
-     
     } else {
       this.topics$.pipe(first()).subscribe((topics) => {
         this.pickedTopic$.next(topics.find((t) => t.title === title) || null);

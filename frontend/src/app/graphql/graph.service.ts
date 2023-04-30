@@ -54,4 +54,15 @@ export class GraphService {
       }
     );
   }
+
+  getTopUserByTopic(title: string) {
+    return this.httpClient.post<
+      {
+        userName: string;
+        score: number;
+      }[]
+    >('http://localhost:2000/api/get-top-user-by-topic', {
+      title,
+    });
+  }
 }

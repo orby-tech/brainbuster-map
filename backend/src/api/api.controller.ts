@@ -95,4 +95,17 @@ export class ApiController {
     return questions[Math.floor(Math.random() * questions.length)]
       ?.recommendations;
   }
+
+  @Post('get-top-user-by-topic')
+  getTopUserByTopic(@Body() { title }: { title: string }): {
+    userName: string;
+    score: number;
+  }[] {
+    return [
+      {
+        userName: 'user1',
+        score: 100,
+      },
+    ];
+  }
 }

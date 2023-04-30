@@ -41,7 +41,11 @@
     <div class="additonal-menu">
       <mat-card>
         <mat-card-title>Top users on topic</mat-card-title>
-        -
+        <mat-card-content>
+          <p *ngFor="let r of topUsers$ | async; index as i">
+            {{ i + 1 }}) {{ r.userName }} with {{ r.score }} points
+          </p>
+        </mat-card-content>
       </mat-card>
       <mat-card>
         <mat-card-title>Your recommenadtions in topic</mat-card-title>
