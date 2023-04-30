@@ -157,7 +157,21 @@ export class GraphComponent {
       data: { topic: this.pickedTopic$.getValue()?.title },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => {
+      this.pickedTopic$.pipe(first()).subscribe((t) => {
+        if (!t) {
+          return;
+        }
+
+        this.graphService
+          .getRecomendations(t.title)
+          .subscribe((x) => this.reccomendations$.next(x));
+
+        this.graphService
+          .getTopUserByTopic(t.title)
+          .subscribe((x) => this.topUsers$.next(x));
+      });
+    });
   }
 
   getTotalQuestions(topic: Topic | null, topics: Array<Topic>): number {
