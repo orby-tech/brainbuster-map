@@ -1,5 +1,20 @@
+<header>
+  <div class="header--menu-info-block">
+    <button
+      mat-icon-button
+      color="primary"
+      aria-label="Example icon button with a menu icon"
+      (click)="menuVisible = !menuVisible"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>brainbuster-map</h1>
+  </div>
+
+</header>
+
 <mat-drawer-container class="example-container">
-  <mat-drawer mode="side" [opened]="true">
+  <mat-drawer mode="side" [opened]="menuVisible">
     <nav>
       <button
         mat-button

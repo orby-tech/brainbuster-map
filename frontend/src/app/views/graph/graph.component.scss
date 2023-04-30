@@ -1,36 +1,60 @@
-mat-drawer-container{
-    height: 100%;
+header {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+
+  .header--menu-info-block {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    h1 {
+      display: contents;
+      color: #bf00bf;
+    }
+  }
+}
+
+mat-drawer-container {
+  min-height: 100%;
 }
 
 nav {
-    width: 300px;
+  width: 300px;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 mat-drawer-content {
+  display: flex;
+  flex-direction: row;
+
+  main {
+    flex: 2;
+    padding: 20px;
+  }
+
+  .additonal-menu {
+    flex: 1;
+    padding: 20px;
+
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 20px;
 
-    main {
-        flex: 2;
-        padding: 20px;
+    mat-card {
+      padding: 20px;
     }
+  }
+}
 
-    .additonal-menu {
-        flex: 1;
-        padding: 20px;
-        
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-
-        mat-card {
-            padding: 20px;
-        }
-    }
-
+@media (max-width: 1200px) {
+  mat-drawer-content {
+    flex-direction: column-reverse;
+  }
 }

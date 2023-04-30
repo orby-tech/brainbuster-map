@@ -28,6 +28,7 @@ interface ExampleFlatNode {
   styleUrls: ['./graph.component.scss'],
 })
 export class GraphComponent {
+  menuVisible = window.innerWidth > 600;
   userName = localStorage.getItem('USER_NAME') || '';
   topics$ = this.graphService.topics$;
 
