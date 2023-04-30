@@ -5,7 +5,7 @@ import {
   MatTreeFlattener,
   MatTreeFlatDataSource,
 } from '@angular/material/tree';
-import { Topic } from '@common/graph/types';
+import { QuestionItem, Topic } from '@common/graph/types';
 import { BehaviorSubject, combineLatest, first, map, tap } from 'rxjs';
 import { GraphService } from 'src/app/graphql/graph.service';
 import { PassTestComponent } from '../dialogs/pass-test/pass-test.component';
@@ -38,6 +38,8 @@ export class GraphComponent {
       });
     })
   );
+
+  reccomendations$ = new BehaviorSubject<QuestionItem['recommendations']>([]);
 
   childrenTopics$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
     map(([topics, pickedTopic]) =>
@@ -84,6 +86,15 @@ export class GraphComponent {
         );
       }
     });
+    this.pickedTopic$.subscribe((t) => {
+      if (!t) {
+        return;
+      }
+
+      this.graphService
+        .getRecomendations(t.title)
+        .subscribe((x) => this.reccomendations$.next(x));
+    })
   }
 
   private _transformer = (node: FoodNode, level: number) => {

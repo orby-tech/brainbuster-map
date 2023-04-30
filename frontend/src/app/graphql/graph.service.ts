@@ -44,4 +44,14 @@ export class GraphService {
       }
     );
   }
+
+  getRecomendations(title: string) {
+    return this.httpClient.post<QuestionItem['recommendations']>(
+      'http://localhost:2000/api/get-recommendations',
+      {
+        title,
+        userId: '1',
+      }
+    );
+  }
 }

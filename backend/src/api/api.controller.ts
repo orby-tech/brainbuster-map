@@ -11,7 +11,7 @@ const getQuestionsFromGraph = (graph: TopicGraphItem): QuestionItem[] => {
 
 const getAllTopics = (graph: TopicGraphItem): Topic[] => {
   if (!graph.questions.length) {
-    console.warn(`${graph.title} : no questions`)
+    console.warn(`${graph.title} : no questions`);
   }
   return [
     {
@@ -79,5 +79,20 @@ export class ApiController {
     return question.right_answer !== answer
       ? { recomendations: question.recommendations }
       : null;
+  }
+
+  @Post('get-recommendations')
+  getRecomendations(
+    @Body() { title, userId }: { title: string; userId: string },
+  ): QuestionItem['recommendations'] {
+    const allTopics = getAllTopics(TOPIC_GRAPH);
+    const allQuestions = getQuestionsFromGraph(TOPIC_GRAPH);
+    const questions = getAllQuestionsByTopicTitle(
+      title,
+      allTopics,
+      allQuestions,
+    );
+    return questions[Math.floor(Math.random() * questions.length)]
+      ?.recommendations;
   }
 }
