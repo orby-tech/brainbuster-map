@@ -51,7 +51,7 @@ export class GraphService {
       'http://localhost:2000/api/get-recommendations',
       {
         title,
-        userId: '1',
+        userId: localStorage.getItem('USER_NAME') || '',
       }
     );
   }

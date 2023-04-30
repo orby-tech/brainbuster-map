@@ -57,15 +57,7 @@ export class ApiController {
   getRecomendations(
     @Body() { title, userId }: { title: string; userId: string },
   ): QuestionItem['recommendations'] {
-    const allTopics = getAllTopics(TOPIC_GRAPH);
-    const allQuestions = getQuestionsFromGraph(TOPIC_GRAPH);
-    const questions = getAllQuestionsByTopicTitle(
-      title,
-      allTopics,
-      allQuestions,
-    );
-    return questions[Math.floor(Math.random() * questions.length)]
-      ?.recommendations;
+    return this.apiService.getRecommendations(title, userId);
   }
 
   @Post('get-top-user-by-topic')

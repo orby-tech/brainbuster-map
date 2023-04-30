@@ -88,6 +88,25 @@ export class ApiService {
     return !isCorrect ? { recomendations: question.recommendations } : null;
   }
 
+  getRecommendations(topicTitle: string, userId: string) {
+    const userAnswers = this.usersAnswers.filter(
+      (ua) => ua.userId === userId && !ua.isCorrect,
+    );
+    const questionsOfTopic = getAllQuestionsByTopicTitle(
+      topicTitle,
+      getAllTopics(TOPIC_GRAPH),
+      getQuestionsFromGraph(TOPIC_GRAPH),
+    );
+    return userAnswers
+      .map((ua) => {
+        return (
+          questionsOfTopic.find((q) => q.question === ua.questionId)
+            ?.recommendations || []
+        );
+      })
+      .flat();
+  }
+
   getTopUserByListQuestionIds(questionIds: string[]): {
     userName: string;
     score: number;
@@ -107,7 +126,6 @@ export class ApiService {
       userAnswersByQuestionId,
     ).map(([questionId, answers]) => {
       const correctAnswers = answers.filter((a) => a.isCorrect);
-      console.log(correctAnswers);
 
       return {
         questionId,
