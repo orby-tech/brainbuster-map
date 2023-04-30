@@ -41,6 +41,7 @@ export class GraphService {
       {
         answer,
         questionTitle,
+        userName: localStorage.getItem('USER_NAME') || '',
       }
     );
   }
