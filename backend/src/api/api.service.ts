@@ -163,4 +163,18 @@ export class ApiService {
       score: x.correctAnswers,
     }));
   }
+
+  getInfoAboutUser(
+    userId: string,
+    topic: string,
+  ): { userName: string; score: number; recomendations: string[] } {
+    return {
+      userName: userId,
+      score:
+        this.getTopUserByListQuestionIds([topic])?.find(
+          (t) => t.userName === userId,
+        )?.score || 0,
+      recomendations: this.getRecommendations(topic, userId),
+    };
+  }
 }

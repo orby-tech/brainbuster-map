@@ -49,6 +49,12 @@ export class GraphComponent {
     }[]
   >([]);
 
+  shareLink$ = this.pickedTopic$.pipe(
+    map(
+      (t) => window.location.origin + '/share/' + this.userName + '/' + t?.title
+    )
+  );
+
   userOnTop$ = this.topUsers$.pipe(
     map((users) => !!users.find((u) => u.userName === this.userName))
   );

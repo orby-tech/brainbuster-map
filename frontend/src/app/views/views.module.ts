@@ -7,9 +7,10 @@ import { MaterialModule } from '../material/material.module';
 import { QuestionComponent } from './dialogs/question/question.component';
 import { PassTestComponent } from './dialogs/pass-test/pass-test.component';
 import { GraphSvgComponent } from './graph/graph-svg/graph-svg.component';
+import { SharePageComponent } from './share-page/share-page.component';
 
 @NgModule({
-  declarations: [GraphComponent, QuestionComponent, PassTestComponent, GraphSvgComponent],
+  declarations: [GraphComponent, QuestionComponent, PassTestComponent, GraphSvgComponent, SharePageComponent],
   imports: [CommonModule, MatTreeModule, MatIconModule, MaterialModule],
   providers: [GraphComponent],
 })

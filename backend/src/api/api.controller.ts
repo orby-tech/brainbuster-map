@@ -76,4 +76,11 @@ export class ApiController {
       questions.map((q) => q.question),
     );
   }
+
+  @Post('get-info-about-user')
+  getInfoAboutUser(
+    @Body() { userId, topic }: { userId: string; topic: string },
+  ): { userName: string; score: number; recomendations: string[] } {
+    return this.apiService.getInfoAboutUser(userId, topic);
+  }
 }

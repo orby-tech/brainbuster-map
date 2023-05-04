@@ -63,4 +63,15 @@ export class GraphService {
       title,
     });
   }
+
+  getInfoAboutUser(userName: string, topic: string) {
+    return this.httpClient.post<{
+      userName: string;
+      score: number;
+      recomendations: string[];
+    }>('/api/get-info-about-user', {
+      userName,
+      topic,
+    });
+  }
 }

@@ -42,9 +42,14 @@
   </mat-drawer>
   <mat-drawer-content>
     <main class="content">
-      <h2>{{ (pickedTopic$ | async)?.title }} </h2>
+      <h2>{{ (pickedTopic$ | async)?.title }}</h2>
       <p>Total quantity of questions: {{ totalQuestions$ | async }}</p>
-      <button class="pass-test-button" mat-raised-button color="accent" (click)="passTest()">
+      <button
+        class="pass-test-button"
+        mat-raised-button
+        color="accent"
+        (click)="passTest()"
+      >
         Pass test
       </button>
       <app-graph-svg
@@ -70,6 +75,33 @@
           <p *ngFor="let r of reccomendations$ | async; index as i">
             {{ i + 1 }}) {{ r }}
           </p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-title> Share your knowledge with others! </mat-card-title>
+        <mat-card-content>
+          <p>Do you know something about this topic?</p>
+          <button mat-raised-button color="accent" disabled="true">
+            Add new question (comming soon)
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>Share your results</mat-card-title>
+        <mat-card-content>
+          <p>
+            Do you want to share your results or ability to pass test with
+            others?
+          </p>
+          {{ shareLink$ | async }}
+          <button
+            mat-raised-button
+            color="accent"
+            [cdkCopyToClipboard]="(shareLink$ | async) || ''"
+          >
+            Share results
+          </button>
         </mat-card-content>
       </mat-card>
     </div>
