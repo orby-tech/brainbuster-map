@@ -10,7 +10,6 @@
     </button>
     <h1>brainbuster-map</h1>
   </div>
-
 </header>
 
 <mat-drawer-container class="example-container">
@@ -44,14 +43,14 @@
   <mat-drawer-content>
     <main class="content">
       <h2>{{ (pickedTopic$ | async)?.title }} {{ totalQuestions$ | async }}</h2>
+      <button class="pass-test-button" mat-raised-button color="accent" (click)="passTest()">
+        Pass test
+      </button>
       <app-graph-svg
         [pickedTopic]="pickedTopic$ | async"
         [parentTopics]="parentTopics$ | async"
         [childrenTopics]="childrenTopics$ | async"
       ></app-graph-svg>
-      <button mat-raised-button color="accent" (click)="passTest()">
-        Pass test
-      </button>
     </main>
     <div class="additonal-menu">
       <h2>Hello, {{ userName }}!</h2>
