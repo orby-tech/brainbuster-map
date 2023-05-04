@@ -3,18 +3,21 @@
     You can stop passing in any time, amount limited only summed up count of
     questions and your wanting!
   </p>
+</div>
 
+<h3 mat-dialog-title>Recommensations:</h3>
+<div mat-dialog-content>
   <div
     *ngIf="(filteredRecomendations$ | async)?.length; else noRecommendations"
   >
-    <mat-list role="list">
-      <mat-list-item
+    <div role="list">
+      <p
         role="listitem"
         *ngFor="let recomendation of filteredRecomendations$ | async"
       >
         {{ recomendation }}
-      </mat-list-item>
-    </mat-list>
+      </p>
+    </div>
   </div>
   <ng-template #noRecommendations>
     <p>After test you will see here your personal recommenadtions</p>
