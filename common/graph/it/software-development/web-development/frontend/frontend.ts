@@ -880,6 +880,8 @@ export const BrowserAPIsTopic = {
       children: [],
       questions: [],
     },
+    WebComponentsTopic,
+    ProgressiveWebAppstopic,
   ],
   questions: [],
 };
@@ -887,19 +889,23 @@ export const BrowserAPIsTopic = {
 export const FrontendTopic = {
   title: "Frontend",
   children: [
-    HTMLTopic,
-    CSSTopic,
+    {
+      title: "Design and layout",
+      children: [
+        HTMLTopic,
+        CSSTopic,
+        ResponsiceDesignTopic,
+        UXTopic,
+        AccessibilityTopic,
+      ],
+      questions: [],
+    },
     JavaScriptTopic,
-    ResponsiceDesignTopic,
-    AccessibilityTopic,
     CrossBrowserCompatibilityTopic,
     WebPerformanceOptimizationTopic,
     WebSecurityTopic,
-    UXTopic,
     SinglePageApplications,
-    ProgressiveWebAppstopic,
-    WebComponentsTopic,
     BrowserAPIsTopic,
-     ],
+  ],
   questions: [],
 };
