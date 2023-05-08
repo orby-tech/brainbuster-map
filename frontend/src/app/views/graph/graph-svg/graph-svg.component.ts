@@ -2,7 +2,9 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
+  Output,
 } from '@angular/core';
 import { Topic } from '@common/graph/types';
 import { BehaviorSubject, combineLatest, debounceTime, map, tap } from 'rxjs';
@@ -24,6 +26,8 @@ export class GraphSvgComponent implements AfterViewInit {
   @Input() set childrenTopics(childrenTopics: Topic[] | null | undefined) {
     this.childrenTopics$.next(childrenTopics || []);
   }
+
+  @Output() pick = new EventEmitter<string>();
 
   svgWidth$ = new BehaviorSubject<number>(500);
   svgHeight$ = new BehaviorSubject<number>(500);
@@ -59,6 +63,7 @@ export class GraphSvgComponent implements AfterViewInit {
         const y = svgHeight * (1 - Math.sin(angel) * 0.75) * 0.5;
         return {
           title: t.title.split(' '),
+          fullTitle: t.title,
           transform: ` translate(${x},${y}) `,
           x: x,
           y: y,
@@ -92,6 +97,7 @@ export class GraphSvgComponent implements AfterViewInit {
         const y = svgHeight * (1 - Math.sin(angel) * 0.75) * 0.5;
         return {
           title: t.title.split(' '),
+          fullTitle: t.title,
           transform: ` translate(${x},${y}) `,
           x: x,
           y: y,
@@ -123,5 +129,9 @@ export class GraphSvgComponent implements AfterViewInit {
       this.cd.detectChanges();
     });
     observer.observe(myEl);
+  }
+
+  pickTopic(topic: any) {
+    this.pick.emit(topic.fullTitle);
   }
 }
