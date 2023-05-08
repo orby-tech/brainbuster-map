@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QuestionItem, Topic, TopicGraphItem } from '@common/graph/types';
 import { TOPIC_GRAPH } from '@common/graph/root';
+import { generateRandomPrettyName } from '@common/tools/generate-random-pretty-name';
 
 export const getQuestionsFromGraph = (
   graph: TopicGraphItem,
@@ -54,7 +55,20 @@ export class ApiService {
   }[] = [];
 
   constructor() {
-    this.setAnswer('What does HTML stand for?', '1', true);
+    const allQuestions = getQuestionsFromGraph(TOPIC_GRAPH);
+    for (let userIndex = 0; userIndex < 10; userIndex++) {
+      const userName = `${generateRandomPrettyName()} ${generateRandomPrettyName()}`;
+      for (
+        let i = 0;
+        i < Math.floor(Math.random() * allQuestions.length);
+        i++
+      ) {
+        const question =
+          allQuestions[Math.floor(Math.random() * allQuestions.length)];
+        const isCorrect = Math.random() > 0.5;
+        this.setAnswer(question.question, userName, isCorrect);
+      }
+    }
   }
 
   setAnswer(
