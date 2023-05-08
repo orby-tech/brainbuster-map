@@ -56,6 +56,7 @@
         [pickedTopic]="pickedTopic$ | async"
         [parentTopics]="parentTopics$ | async"
         [childrenTopics]="childrenTopics$ | async"
+        [childrens]="childrens$ | async"
         (pick)="pick($event)"
       ></app-graph-svg>
     </main>

@@ -27,10 +27,28 @@ export class GraphSvgComponent implements AfterViewInit {
     this.childrenTopics$.next(childrenTopics || []);
   }
 
+  @Input() set childrens(
+    childrens:
+      | {
+          title: string;
+          questionsCount: number;
+        }[]
+      | undefined
+      | null
+  ) {
+    this.childrens$.next(childrens || []);
+  }
+
   @Output() pick = new EventEmitter<string>();
 
   svgWidth$ = new BehaviorSubject<number>(500);
   svgHeight$ = new BehaviorSubject<number>(500);
+  childrens$ = new BehaviorSubject<
+    {
+      title: string;
+      questionsCount: number;
+    }[]
+  >([]);
 
   pickedTopicPosition$ = combineLatest([this.svgWidth$, this.svgHeight$]).pipe(
     map(([svgWidth, svgHeight]) => {
@@ -83,33 +101,49 @@ export class GraphSvgComponent implements AfterViewInit {
     this.svgWidth$,
     this.svgHeight$,
     this.pickedTopicPosition$,
+    this.childrens$,
   ]).pipe(
-    map(([childrenTopics, svgWidth, svgHeight, pickedTopicPosition]) => {
-      const childrenTopicsTopicsLength = childrenTopics.length;
-      return childrenTopics.map((t, i) => {
-        const angel =
-          (Math.PI / childrenTopicsTopicsLength / 2) * (i * 2 + 1) + Math.PI;
-        const rotationAngelNotCleared = (angel / Math.PI) * 360;
-        const rotationAngel =
-          rotationAngelNotCleared === 180 ? 0 : rotationAngelNotCleared;
+    map(
+      ([
+        childrenTopics,
+        svgWidth,
+        svgHeight,
+        pickedTopicPosition,
+        childrens,
+      ]) => {
+        const branches = childrenTopics.filter((x) => {
+          const questionsCount = childrens.find(
+            (y) => y.title === x.title
+          )?.questionsCount;
+          return questionsCount && questionsCount > 0;
+        });
 
-        const x = svgWidth * (1 + Math.cos(angel) * 0.75) * 0.5;
-        const y = svgHeight * (1 - Math.sin(angel) * 0.75) * 0.5;
-        return {
-          title: t.title.split(' '),
-          fullTitle: t.title,
-          transform: ` translate(${x},${y}) `,
-          x: x,
-          y: y,
-          vector: {
-            x1: svgWidth / 2 + (x - svgWidth / 2) * 0.1,
-            y1: svgHeight / 2 + (y - svgHeight / 2) * 0.1,
-            x2: svgWidth / 2 + (x - svgWidth / 2) * 0.9,
-            y2: svgHeight / 2 + (y - svgHeight / 2) * 0.9,
-          },
-        };
-      });
-    })
+        const childrenTopicsTopicsLength = branches.length;
+        return branches.map((t, i) => {
+          const angel =
+            (Math.PI / childrenTopicsTopicsLength / 2) * (i * 2 + 1) + Math.PI;
+          const rotationAngelNotCleared = (angel / Math.PI) * 360;
+          const rotationAngel =
+            rotationAngelNotCleared === 180 ? 0 : rotationAngelNotCleared;
+
+          const x = svgWidth * (1 + Math.cos(angel) * 0.75) * 0.5;
+          const y = svgHeight * (1 - Math.sin(angel) * 0.75) * 0.5;
+          return {
+            title: t.title.split(' '),
+            fullTitle: t.title,
+            transform: ` translate(${x},${y}) `,
+            x: x,
+            y: y,
+            vector: {
+              x1: svgWidth / 2 + (x - svgWidth / 2) * 0.1,
+              y1: svgHeight / 2 + (y - svgHeight / 2) * 0.1,
+              x2: svgWidth / 2 + (x - svgWidth / 2) * 0.9,
+              y2: svgHeight / 2 + (y - svgHeight / 2) * 0.9,
+            },
+          };
+        });
+      }
+    )
   );
 
   topics$ = combineLatest([
