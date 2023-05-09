@@ -60,6 +60,14 @@ mat-drawer-content {
   }
 }
 
+.picked-user {
+  background-color: #bf00bf1f;
+}
+
+.skip-block {
+  display: inline-table;
+}
+
 @media (max-width: 1200px) {
   mat-drawer-content {
     flex-direction: column-reverse;

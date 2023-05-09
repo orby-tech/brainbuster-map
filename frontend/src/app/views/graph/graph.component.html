@@ -65,9 +65,18 @@
       <mat-card>
         <mat-card-title>Top users on topic</mat-card-title>
         <mat-card-content>
-          <p *ngFor="let r of topUsers$ | async; index as i">
-            {{ i + 1 }}) {{ r.userName }} with {{ r.score }} points
-          </p>
+          <div
+            *ngFor="let r of topUsers$ | async; index as i"
+            [class.skip-block]="!(r.userName === userName || i < 3)"
+          >
+            <p
+              *ngIf="r.userName === userName || i < 3; else elseBlock"
+              [class.picked-user]="r.userName === userName"
+            >
+              {{ i + 1 }}) {{ r.userName }} with {{ r.score }} points
+            </p>
+            <ng-template #elseBlock><p>.</p></ng-template>
+          </div>
           <p *ngIf="!(userOnTop$ | async)">Pass test to be in top!</p>
         </mat-card-content>
       </mat-card>
