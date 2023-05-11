@@ -41,7 +41,7 @@
     </nav>
   </mat-drawer>
   <mat-drawer-content>
-    <main class="content">
+    <main class="content" id="host">
       <h2>{{ (pickedTopic$ | async)?.title }}</h2>
       <p>Total quantity of questions: {{ totalQuestions$ | async }}</p>
       <button
@@ -52,13 +52,27 @@
       >
         Pass test
       </button>
-      <app-graph-svg
-        [pickedTopic]="pickedTopic$ | async"
-        [parentTopics]="parentTopics$ | async"
-        [childrenTopics]="childrenTopics$ | async"
-        [childrens]="childrens$ | async"
-        (pick)="pick($event)"
-      ></app-graph-svg>
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="treeType">
+        <mat-radio-button value="graph">Graph</mat-radio-button>
+        <mat-radio-button value="roadmap">Roadmap</mat-radio-button>
+      </mat-radio-group>
+      <ng-container [ngSwitch]="treeType">
+        <app-graph-svg
+          *ngSwitchCase="'graph'"
+          [pickedTopic]="pickedTopic$ | async"
+          [parentTopics]="parentTopics$ | async"
+          [childrenTopics]="childrenTopics$ | async"
+          [childrens]="childrens$ | async"
+          [svgWidth]="svgWidth$ | async"
+          (pick)="pick($event)"
+        ></app-graph-svg>
+        <app-roadmap-svg
+          *ngSwitchCase="'roadmap'"
+          [topics]="topics$ | async"
+          [svgWidth]="svgWidth$ | async"
+          [pickedTopic]="pickedTopic$ | async"
+        ></app-roadmap-svg>
+      </ng-container>
     </main>
     <div class="additonal-menu">
       <h2>Hello, {{ userName }}!</h2>

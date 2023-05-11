@@ -1,4 +1,4 @@
-<div id="host">
+<div>
   <svg [attr.width]="svgWidth$ | async" height="500px">
     <g *ngFor="let topic of topics$ | async" (click)="pickTopic(topic)" class="topic">
       <text

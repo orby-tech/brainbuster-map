@@ -1,5 +1,9 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   MatTreeFlattener,
@@ -27,10 +31,13 @@ interface ExampleFlatNode {
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
 })
-export class GraphComponent {
+export class GraphComponent implements AfterViewInit {
   menuVisible = window.innerWidth > 600;
   userName = localStorage.getItem('USER_NAME') || '';
   topics$ = this.graphService.topics$;
+
+  treeType: 'graph' | 'roadmap' = 'roadmap';
+  svgWidth$ = new BehaviorSubject<number>(500);
 
   pickedTopic$ = new BehaviorSubject<Topic | null>(null);
   parentTopics$ = combineLatest([this.topics$, this.pickedTopic$]).pipe(
@@ -85,7 +92,11 @@ export class GraphComponent {
     map(([topics, pickedTopic]) => this.getTotalQuestions(pickedTopic, topics))
   );
 
-  constructor(private graphService: GraphService, public dialog: MatDialog) {
+  constructor(
+    private graphService: GraphService,
+    public dialog: MatDialog,
+    private cd: ChangeDetectorRef
+  ) {
     this.pickedTopic$.subscribe((t) => {
       if (!t) {
         return;
@@ -120,6 +131,18 @@ export class GraphComponent {
         .getTopUserByTopic(t.title)
         .subscribe((x) => this.topUsers$.next(x));
     });
+  }
+
+  ngAfterViewInit() {
+    const myEl = document.querySelector('#host');
+    if (!myEl) {
+      return;
+    }
+    const observer = new ResizeObserver((x) => {
+      this.svgWidth$.next(x[0].contentRect.width);
+      this.cd.detectChanges();
+    });
+    observer.observe(myEl);
   }
 
   private _transformer = (node: FoodNode, level: number) => {

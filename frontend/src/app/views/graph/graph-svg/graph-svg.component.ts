@@ -14,7 +14,7 @@ import { BehaviorSubject, combineLatest, debounceTime, map, tap } from 'rxjs';
   templateUrl: './graph-svg.component.svg',
   styleUrls: ['./graph-svg.component.scss'],
 })
-export class GraphSvgComponent implements AfterViewInit {
+export class GraphSvgComponent {
   @Input() set pickedTopic(pickedTopic: Topic | null) {
     this.pickedTopic$.next(pickedTopic);
   }
@@ -37,6 +37,10 @@ export class GraphSvgComponent implements AfterViewInit {
       | null
   ) {
     this.childrens$.next(childrens || []);
+  }
+
+  @Input() set svgWidth(svgWidth: number | null) {
+    this.svgWidth$.next(svgWidth || 500);
   }
 
   @Output() pick = new EventEmitter<string>();
@@ -150,20 +154,6 @@ export class GraphSvgComponent implements AfterViewInit {
     this.childrenTopicsToSvg$,
     this.parantTopicsToSvg$,
   ]).pipe(map((x) => x.flat()));
-
-  constructor(private cd: ChangeDetectorRef) {}
-
-  ngAfterViewInit() {
-    const myEl = document.querySelector('#host');
-    if (!myEl) {
-      return;
-    }
-    const observer = new ResizeObserver((x) => {
-      this.svgWidth$.next(x[0].contentRect.width);
-      this.cd.detectChanges();
-    });
-    observer.observe(myEl);
-  }
 
   pickTopic(topic: any) {
     this.pick.emit(topic.fullTitle);

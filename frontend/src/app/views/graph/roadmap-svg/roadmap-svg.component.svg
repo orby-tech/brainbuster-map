@@ -1,0 +1,65 @@
+<svg
+  [attr.width]="svgWidth$ | async"
+  [attr.height]="svgHeight$ | async"
+  *ngIf="roadmapStates$ | async; let roadmapStates"
+>
+  <g
+    *ngFor="let state of roadmapStates; index as i"
+    fill="black"
+    stroke-width="5"
+    [attr.transform]="'translate(100, ' + state.gap + ')'"
+  >
+    <text>
+      <tspan
+        *ngFor="
+          let tspan of [toRoman(i + 1), state.title.split(' ')].flat();
+          index as i
+        "
+        [attr.dy]="i <= 1 ? '0px' : '15px'"
+        [attr.x]="i < 1 ? '0px' : '20px'"
+      >
+        {{ tspan }}
+      </tspan>
+    </text>
+
+    <g
+      *ngFor="let subChild of state.subChilds; index as ic"
+      fill="black"
+      stroke-width="4"
+      [attr.transform]="'translate(150, ' + (28 * ic + 0) + ')'"
+    >
+      <g transform="translate(0, 10)">
+        <line
+          x1="0"
+          [attr.y1]="-15"
+          x2="50"
+          [attr.y2]="0"
+          stroke="black"
+          stroke-width="1"
+        ></line>
+
+        <line
+          x1="50"
+          [attr.y1]="0"
+          x2="100"
+          [attr.y2]="0"
+          stroke="black"
+          stroke-width="1"
+        ></line>
+      </g>
+
+      <text transform="translate(50, 0)">
+        {{ subChild }}
+      </text>
+    </g>
+  </g>
+
+  <line
+    x1="250"
+    y1="50"
+    x2="250"
+    [attr.y2]="svgHeight$ | async"
+    stroke="black"
+    stroke-width="1"
+  ></line>
+</svg>
